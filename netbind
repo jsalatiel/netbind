@@ -1,0 +1,17 @@
+#!/bin/sh
+export PATH=$PATH:/usr/local/bin:/root/bin
+
+if [ $# == 0 ] ; then 
+        echo Use $0 interface_to_bind application parameters
+        exit 1
+fi
+
+if ! getip $1 &>/dev/null ; then
+        echo Could not get ip from interface $1
+        exit 2
+fi
+IP=$(getip $1)
+shift 1
+
+BIND_ADDR=$IP LD_PRELOAD=/usr/local/lib/bind.so  $*
+
