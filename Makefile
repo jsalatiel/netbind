@@ -1,6 +1,6 @@
-all : compile
+all : world
 
-compile :
+world :
 	$(CC) -nostartfiles -fpic -shared bind.c -o bind.so -ldl -D_GNU_SOURCE 
 
 clean :
